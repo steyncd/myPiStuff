@@ -8,6 +8,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
             self.setStatus("Off")
         else:
             self.setStatus("On")
+        self.PostStatus()
 
     def HandleCommand(self, topic, payload, gpio) :
         action = str(payload.decode("utf-8")).strip().lower()
@@ -15,6 +16,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
         #command
         #if self.getCommandTopic() in topic :
         if action=="on" or action=="1":
+            gpio.setup(self.__pin,gpio.OUT)
             gpio.output(self.__pin, gpio.LOW)
             self.getClient().publish(self.getStatusTopic,"ON")
             self.setStatus("On")
@@ -35,6 +37,10 @@ class MqttSwitch(MqttDevice.MqttDevice) :
             print("HandleCommand::toggling " + self.getName() + " status, pin: " + self.__pin)
         elif action=="status":
             print("HandleCommand::checking " + self.getName() + " status")
+            if gpio.input(pin) == gpio.HIGH:
+                self.setStatus("Off")
+            else:
+                self.setStatus("On")
             self.PostStatus()
         else:
             print("ToggleGeyser::Command not recognized")
