@@ -3,21 +3,23 @@ import time as time
 
 GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
  
-GPIO.setup(2, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(3, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(4, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(5, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(27, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(22, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(23, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(24, GPIO.OUT) # GPIO Assign mode
 
-GPIO.output(2, GPIO.LOW) # out
-time.sleep(0.5)
-GPIO.output(3, GPIO.LOW) # out
-time.sleep(0.5)
-GPIO.output(4, GPIO.LOW) # out
-time.sleep(0.5)
-GPIO.output(5, GPIO.LOW) # out
+GPIO.output(27, GPIO.LOW) # out
+time.sleep(1)
+GPIO.output(22, GPIO.LOW) # out
+time.sleep(1)
+GPIO.output(23, GPIO.LOW) # out
+time.sleep(1)
+GPIO.output(24, GPIO.LOW) # out
 time.sleep(5)
 
-GPIO.output(2, GPIO.HIGH) # out
-GPIO.output(3, GPIO.HIGH) # out
-GPIO.output(4, GPIO.HIGH) # out
-GPIO.output(5, GPIO.HIGH) # out
+GPIO.output(27, GPIO.HIGH) # out
+GPIO.output(22, GPIO.HIGH) # out
+GPIO.output(23, GPIO.HIGH) # out
+GPIO.output(24, GPIO.HIGH) # out
+
+GPIO.cleanup()

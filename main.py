@@ -40,10 +40,10 @@ queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "hellol
 queueService.connectToBroker()
 client = queueService.getClient()
 
-myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client, 2)
-myGeyser = Switch.MqttSwitch("Switch2","helloliam/switch2/", client, 3)
-myGeyser = Switch.MqttSwitch("Switch3","helloliam/swtich3/", client, 4)
-myGeyser = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 5)
+myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client, 27)
+myGeyser = Switch.MqttSwitch("Switch2","helloliam/switch2/", client, 22)
+myGeyser = Switch.MqttSwitch("Switch3","helloliam/swtich3/", client, 23)
+myGeyser = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 24)
 
 myGeyser.continuousUpdate = True
 myGeyser.SubscribeToTopics()
