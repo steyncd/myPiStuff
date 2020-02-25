@@ -32,7 +32,7 @@ def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
 
 queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
-ueueService.connectToBroker()
+queueService.connectToBroker()
 client = queueService.getClient()
 
 myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client)
