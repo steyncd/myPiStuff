@@ -6,7 +6,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
         super().__init__(name,topic,client)
         self.__pin = pin
         GPIO.setup(pin, GPIO.OUT)
-        if GPIO.output(pin) == GPIO.HIGH:
+        if GPIO.input(pin) == GPIO.HIGH:
             self.setStatus("Off")
         else:
             self.setStatus("On")
@@ -34,7 +34,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
                 self.getClient().publish(self.getStatusTopic,self.getStatus)
                 self.PostStatus()
                 
-                if GPIO.output(self.__pin) == GPIO.HIGH:
+                if GPIO.input(self.__pin) == GPIO.HIGH:
                     GPIO.output(self.__pin, GPIO.LOW)
                 else:
                     GPIO.output(self.__pin, GPIO.HIGH)

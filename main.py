@@ -48,4 +48,5 @@ myGeyser = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 24)
 myGeyser.continuousUpdate = True
 myGeyser.SubscribeToTopics()
 
+GPIO.cleanup()
 client.loop_forever()
