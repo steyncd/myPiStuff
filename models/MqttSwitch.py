@@ -4,6 +4,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
     def __init__(self,name,topic,client,pin,gpio) :
         super().__init__(name,topic,client)
         self.__pin = pin
+        print(pin)
         if gpio.input(pin) == gpio.HIGH:
             self.setStatus("Off")
         else:
