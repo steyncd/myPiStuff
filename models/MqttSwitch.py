@@ -7,9 +7,9 @@ class MqttSwitch(MqttDevice.MqttDevice) :
         GPIO.setwarnings(False) # Ignore warning for now
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(10, GPIO.OUT)
-        if GPIO.output(10) == GPIO.HIGH
+        if GPIO.output(10) == GPIO.HIGH:
             self.setStatus("Off")
-        else
+        else:
             self.setStatus("On")
 
     def HandleCommand(self, topic, payload) :
@@ -37,7 +37,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
                 
                 if GPIO.output(10) == GPIO.HIGH:
                     GPIO.output(10, GPIO.LOW)
-                else
+                else:
                     GPIO.output(10, GPIO.HIGH)
             elif action=="status":
                 print("HandleCommand::checking geyser status")
