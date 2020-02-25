@@ -17,17 +17,16 @@ class MqttSwitch(MqttDevice.MqttDevice) :
         #command
         if self.getCommandTopic() in topic :
             if action=="on" or action=="1":
-                print("HandleCommand::Turning ",self.getName()," on, pin: " + self.__pin)
                 self.__gpio.output(self.__pin, self.__gpio.LOW)
                 self.getClient().publish(self.getStatusTopic,"ON")
                 self.setStatus("On")
+                print("HandleCommand::Turning ",self.getName()," on, pin: " + self.__pin)
             elif action=="off" or action=="0":
-                print("HandleCommand::turning " + self.getName() + " off, pin: " + self.__pin)
                 self.__gpio.output(self.__pin, self.__gpio.HIGH)
                 self.getClient().publish(self.getStatusTopic,"ON")
                 self.setStatus("Off")
+                print("HandleCommand::turning " + self.getName() + " off, pin: " + self.__pin)
             elif action=="toggle":
-                print("HandleCommand::toggling " + self.getName() + " status, pin: " + self.__pin)
                 if self.__gpio.input(self.__pin) == self.__gpio.HIGH:
                     self.__gpio.output(self.__pin, self.__gpio.LOW)
                 else:
@@ -35,6 +34,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
 
                 self.setStatus("On" if self.__status == "Off" else "Off")
                 self.getClient().publish(self.getStatusTopic,self.getStatus)
+                print("HandleCommand::toggling " + self.getName() + " status, pin: " + self.__pin)
             elif action=="status":
                 print("HandleCommand::checking " + self.getName() + " status")
                 self.PostStatus()
