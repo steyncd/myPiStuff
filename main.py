@@ -28,6 +28,17 @@ def on_message(client, userdata, message):
     if myGeyser.getTopic() in message.topic :
         print("on_message::Topic matches geyser topic")
         myGeyser.HandleCommand(message.topic, message.payload)
+    elif switch2.getTopic() in message.topic :
+        print("on_message::Topic matches switch2 topic")
+        switch2.HandleCommand(message.topic, message.payload)
+    elif switch3.getTopic() in message.topic :
+        print("on_message::Topic matches switch3 topic")
+        switch3.HandleCommand(message.topic, message.payload)
+    elif switch4.getTopic() in message.topic :
+        print("on_message::Topic matches switch4 topic")
+        switch4.HandleCommand(message.topic, message.payload)
+    else :
+        print("on_message::Topic not matched to device")
 
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
@@ -42,10 +53,13 @@ client = queueService.getClient()
 
 myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client, 27)
 myGeyser.SubscribeToTopics()
+
 switch2 = Switch.MqttSwitch("Switch2","helloliam/switch2/", client, 22)
 switch2.SubscribeToTopics()
+
 switch3 = Switch.MqttSwitch("Switch3","helloliam/swtich3/", client, 23)
 switch3.SubscribeToTopics()
+
 switch4 = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 24)
 switch4.SubscribeToTopics()
 
