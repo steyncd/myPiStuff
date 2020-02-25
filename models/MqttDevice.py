@@ -2,7 +2,7 @@ import models.Device as Device
 
 class MqttDevice(Device.Device):
     __commandTopic = "cmnd"
-    __statusTopic = "status"
+    __statusTopic = "statusrequest"
     __status = "Standby"
 
     def __init__(self,name,topic,client) :
