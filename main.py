@@ -1,4 +1,4 @@
-import paho.mqtt.client as mqtt   #import client library
+import paho.mqtt.client as mqtt
 import time as time
 import services.MyMqttService as mqttService
 import models.Device as Device
@@ -31,8 +31,8 @@ def on_message(client, userdata, message):
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
 
-queueService = mqttService.MyMqttService("HelloLiam", "192.168.0.11", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
-queueService.connectToBroker()
+queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
+ueueService.connectToBroker()
 client = queueService.getClient()
 
 myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client)
