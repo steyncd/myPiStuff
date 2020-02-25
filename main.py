@@ -27,16 +27,16 @@ def on_message(client, userdata, message):
     
     if myGeyser.getTopic() in message.topic :
         print("on_message::Topic matches geyser topic")
-        myGeyser.HandleCommand(message.topic, message.payload)
+        myGeyser.HandleCommand(message.topic, message.payload, GPIO)
     elif switch2.getTopic() in message.topic :
         print("on_message::Topic matches switch2 topic")
-        switch2.HandleCommand(message.topic, message.payload)
+        switch2.HandleCommand(message.topic, message.payload, GPIO)
     elif switch3.getTopic() in message.topic :
         print("on_message::Topic matches switch3 topic")
-        switch3.HandleCommand(message.topic, message.payload)
+        switch3.HandleCommand(message.topic, message.payload, GPIO)
     elif switch4.getTopic() in message.topic :
         print("on_message::Topic matches switch4 topic")
-        switch4.HandleCommand(message.topic, message.payload)
+        switch4.HandleCommand(message.topic, message.payload, GPIO)
     else :
         print("on_message::Topic not matched to device")
 

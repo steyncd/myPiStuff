@@ -4,33 +4,31 @@ class MqttSwitch(MqttDevice.MqttDevice) :
     def __init__(self,name,topic,client,pin,gpio) :
         super().__init__(name,topic,client)
         self.__pin = pin
-        self.__gpio = gpio
-        gpio.setup(pin, gpio.OUT)
         if gpio.input(pin) == gpio.HIGH:
             self.setStatus("Off")
         else:
             self.setStatus("On")
 
-    def HandleCommand(self, topic, payload) :
+    def HandleCommand(self, topic, payload, gpio) :
         action = str(payload.decode("utf-8")).strip().lower()
         print("HandleCommand::received command with topic ", topic, "and payload ", payload)
         #command
         #if self.getCommandTopic() in topic :
         if action=="on" or action=="1":
-            self.__gpio.output(self.__pin, self.__gpio.LOW)
+            gpio.output(self.__pin, gpio.LOW)
             self.getClient().publish(self.getStatusTopic,"ON")
             self.setStatus("On")
             print("HandleCommand::Turning ",self.getName()," on, pin: " + self.__pin)
         elif action=="off" or action=="0":
-            self.__gpio.output(self.__pin, self.__gpio.HIGH)
+            gpio.output(self.__pin, gpio.HIGH)
             self.getClient().publish(self.getStatusTopic,"ON")
             self.setStatus("Off")
             print("HandleCommand::turning " + self.getName() + " off, pin: " + self.__pin)
         elif action=="toggle":
-            if self.__gpio.input(self.__pin) == self.__gpio.HIGH:
-                self.__gpio.output(self.__pin, self.__gpio.LOW)
+            if gpio.input(self.__pin) == gpio.HIGH:
+                gpio.output(self.__pin, gpio.LOW)
             else:
-                self.__gpio.output(self.__pin, self.__gpio.HIGH)
+                gpio.output(self.__pin, gpio.HIGH)
 
             self.setStatus("On" if self.__status == "Off" else "Off")
             self.getClient().publish(self.getStatusTopic,self.getStatus)
