@@ -44,7 +44,6 @@ def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
 
 
-GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(27, GPIO.OUT) # GPIO Assign mode
 GPIO.setup(22, GPIO.OUT) # GPIO Assign mode
