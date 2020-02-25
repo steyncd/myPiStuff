@@ -5,6 +5,7 @@ import models.Device as Device
 import models.MqttDevice as MqttDevice
 import models.MqttSwitch as Switch
 from multiprocessing import Pool
+import RPi.GPIO as GPIO
 
 def on_connect(client, userdata, flags, rc):
     if rc==0:
@@ -31,11 +32,19 @@ def on_message(client, userdata, message):
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
 
+
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BCM)
+
 queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
 queueService.connectToBroker()
 client = queueService.getClient()
 
-myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client)
+myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client, 2)
+myGeyser = Switch.MqttSwitch("Switch2","helloliam/switch2/", client, 3)
+myGeyser = Switch.MqttSwitch("Switch3","helloliam/swtich3/", client, 4)
+myGeyser = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 5)
+
 myGeyser.continuousUpdate = True
 myGeyser.SubscribeToTopics()
 

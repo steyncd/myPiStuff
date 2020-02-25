@@ -2,12 +2,11 @@ import models.MqttDevice as MqttDevice
 import RPi.GPIO as GPIO
 
 class MqttSwitch(MqttDevice.MqttDevice) :
-    def __init__(self,name,topic,client) :
+    def __init__(self,name,topic,client,pin) :
         super().__init__(name,topic,client)
-        GPIO.setwarnings(False) # Ignore warning for now
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(10, GPIO.OUT)
-        if GPIO.output(10) == GPIO.HIGH:
+        self.__pin = pin
+        GPIO.setup(pin, GPIO.OUT)
+        if GPIO.output(pin) == GPIO.HIGH:
             self.setStatus("Off")
         else:
             self.setStatus("On")
@@ -22,25 +21,25 @@ class MqttSwitch(MqttDevice.MqttDevice) :
                 self.getClient().publish(self.getStatusTopic,"ON")
                 self.setStatus("On")
                 self.PostStatus()
-                GPIO.output(10, GPIO.LOW)
+                GPIO.output(self.__pin, GPIO.LOW)
             elif action=="off" or action=="0":
-                print("HandleCommand::turning geyser off")
+                print("HandleCommand::turning " + self.getName() + " off")
                 self.getClient().publish(self.getStatusTopic,"ON")
                 self.setStatus("Off")
                 self.PostStatus()
-                GPIO.output(10, GPIO.HIGH)
+                GPIO.output(self.__pin, GPIO.HIGH)
             elif action=="toggle":
-                print("HandleCommand::toggling geyser status")
+                print("HandleCommand::toggling " + self.getName() + " status")
                 self.setStatus("On" if self.__status == "Off" else "Off")
                 self.getClient().publish(self.getStatusTopic,self.getStatus)
                 self.PostStatus()
                 
-                if GPIO.output(10) == GPIO.HIGH:
-                    GPIO.output(10, GPIO.LOW)
+                if GPIO.output(self.__pin) == GPIO.HIGH:
+                    GPIO.output(self.__pin, GPIO.LOW)
                 else:
-                    GPIO.output(10, GPIO.HIGH)
+                    GPIO.output(self.__pin, GPIO.HIGH)
             elif action=="status":
-                print("HandleCommand::checking geyser status")
+                print("HandleCommand::checking " + self.getName() + " status")
                 self.PostStatus()
             else:
                 print("ToggleGeyser::Command not recognized")
@@ -49,7 +48,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
             self.PostStatus()
 
     def PostStatus(self) :
-        print("PostStatus::Updating the device status to "+self.getStatus())
+        print("PostStatus::Updating the " + self.getName() + " status to "+self.getStatus())
         self.getClient().publish(self.getStatusTopic(),self.getStatus())
 
     def SubscribeToTopics(self) :
