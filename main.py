@@ -46,6 +46,10 @@ def on_publish(client, userdata, mid):
 
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(27, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(22, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(23, GPIO.OUT) # GPIO Assign mode
+GPIO.setup(24, GPIO.OUT) # GPIO Assign mode
 
 queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
 queueService.connectToBroker()
