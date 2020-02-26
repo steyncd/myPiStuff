@@ -53,20 +53,17 @@ queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "hellol
 queueService.connectToBroker()
 client = queueService.getClient()
 
-try :
-    myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
-    myGeyser.SubscribeToTopics()
+myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
+myGeyser.SubscribeToTopics()
 
-    switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
-    switch2.SubscribeToTopics()
+switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
+switch2.SubscribeToTopics()
 
-    switch3 = Switch.MqttSwitch("Switch3", "helloliam/swtich3/", client, 23)
-    switch3.SubscribeToTopics()
+switch3 = Switch.MqttSwitch("Switch3", "helloliam/swtich3/", client, 23)
+switch3.SubscribeToTopics()
 
-    switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
-    switch4.SubscribeToTopics()
-finally:
-    GPIO.cleanup()
+switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
+switch4.SubscribeToTopics()
 
 client.loop_forever()
 
