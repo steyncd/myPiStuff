@@ -15,9 +15,8 @@ class MqttSwitch(MqttDevice.MqttDevice) :
         action = str(payload.decode("utf-8")).strip().lower()
         print("HandleCommand::received command with topic ", topic, "and payload ", payload)
         if action=="on" or action=="1":
+            gpio.output(self.__pin, gpio.LOW)
             print("HandleCommand::on command received")
-            # gpio.setup(self.__pin,gpio.OUT)
-            # gpio.output(self.__pin, gpio.LOW)
             # self.getClient().publish(self.getStatusTopic,"ON")
             # self.setStatus("On")
             # print("HandleCommand::Turning ",self.getName()," on, pin: " + self.__pin)
