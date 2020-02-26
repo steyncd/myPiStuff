@@ -42,28 +42,25 @@ def on_message(client, userdata, message):
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
 
+try :
+    queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe,
+                                             on_message, on_publish)
+    queueService.connectToBroker()
+    client = queueService.getClient()
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(27, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(22, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(23, GPIO.OUT) # GPIO Assign mode
-GPIO.setup(24, GPIO.OUT) # GPIO Assign mode
+    myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
+    myGeyser.SubscribeToTopics()
 
-queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe, on_message, on_publish)
-queueService.connectToBroker()
-client = queueService.getClient()
+    switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
+    switch2.SubscribeToTopics()
 
-myGeyser = Switch.MqttSwitch("Geyser","helloliam/geyser/", client, 27, GPIO)
-myGeyser.SubscribeToTopics()
+    switch3 = Switch.MqttSwitch("Switch3", "helloliam/swtich3/", client, 23)
+    switch3.SubscribeToTopics()
 
-switch2 = Switch.MqttSwitch("Switch2","helloliam/switch2/", client, 22, GPIO)
-switch2.SubscribeToTopics()
+    switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
+    switch4.SubscribeToTopics()
 
-switch3 = Switch.MqttSwitch("Switch3","helloliam/swtich3/", client, 23, GPIO)
-switch3.SubscribeToTopics()
+    client.loop_forever()
+finally:
+    GPIO.cleanup()
 
-switch4 = Switch.MqttSwitch("Switch4","helloliam/switch4/", client, 24, GPIO)
-switch4.SubscribeToTopics()
-
-GPIO.cleanup()
-client.loop_forever()
