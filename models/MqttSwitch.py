@@ -1,17 +1,19 @@
 import models.MqttDevice as MqttDevice
+import RPi.GPIO as gpio
 
 class MqttSwitch(MqttDevice.MqttDevice) :
-    def __init__(self,name,topic,client,pin,gpio) :
+    def __init__(self,name,topic,client,pin) :
         super().__init__(name,topic,client)
         self.__pin = pin
-        print(pin)
+        gpio.setmode(gpio.BCM)
+        gpio.setup(pin, gpio.OUT)  # GPIO Assign mode
         if gpio.input(pin) == gpio.HIGH:
             self.setStatus("Off")
         else:
             self.setStatus("On")
         self.PostStatus()
 
-    def HandleCommand(self, topic, payload, gpio) :
+    def HandleCommand(self, topic, payload) :
         action = str(payload.decode("utf-8")).strip().lower()
         print("HandleCommand::received command with topic ", topic, "and payload ", payload)
         if action=="on" or action=="1":
@@ -21,6 +23,7 @@ class MqttSwitch(MqttDevice.MqttDevice) :
             # self.setStatus("On")
             # print("HandleCommand::Turning ",self.getName()," on, pin: " + self.__pin)
         elif action=="off" or action=="0":
+            gpio.output(self.__pin, gpio.HIGH)
             print("HandleCommand::off command received")
             # gpio.output(self.__pin, gpio.HIGH)
             # self.getClient().publish(self.getStatusTopic,"ON")

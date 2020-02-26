@@ -5,7 +5,6 @@ import models.Device as Device
 import models.MqttDevice as MqttDevice
 import models.MqttSwitch as Switch
 from multiprocessing import Pool
-import RPi.GPIO as GPIO
 
 def on_connect(client, userdata, flags, rc):
     if rc==0:
