@@ -1,11 +1,8 @@
-import paho.mqtt.client as mqtt
-import time as time
 import services.MyMqttService as mqttService
-import models.Device as Device
-import models.MqttDevice as MqttDevice
 import models.MqttSwitch as Switch
 from multiprocessing import Pool
 import RPi.GPIO as GPIO
+import configparser
 
 GPIO.VERBOSE = True
 
@@ -100,15 +97,43 @@ try:
         print("mid: " + str(mid))
 
 
-    queueService = mqttService.MyMqttService("HelloLiam", "helloliam.co.za", 773, "helloliam/", on_connect, on_subscribe,
-                                             on_message, on_publish)
+    configParser = configparser.RawConfigParser()
+    configFilePath = r'./settings.config'
+    configParser.read(configFilePath)
+
+    print(configParser.get('settings', 'mqtt_client'))
+    print(configParser.get('settings', 'mqtt_host'))
+    print(configParser.get('settings', 'mqtt_port'))
+
+    mqtt_client = configParser.get('settings', 'mqtt_client')
+    mqtt_host = configParser.get('settings', 'mqtt_host')
+    mqtt_port = configParser.get('settings', 'mqtt_port')
+
+    queueService = mqttService.MyMqttService(mqtt_client, mqtt_host, int(mqtt_port), mqtt_client+"/", on_connect, on_subscribe, on_message, on_publish)
+
     queueService.connect_to_broker()
     client = queueService.get_client()
 
-    myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
-    switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
-    switch3 = Switch.MqttSwitch("Switch3", "helloliam/switch3/", client, 23)
-    switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
+    myGeyser = Switch.MqttSwitch(
+        configParser.get('settings', 'device1_name'),
+        configParser.get('settings', 'device1_topic'),
+        client,
+        configParser.get('settings', 'device1_pin'))
+    switch2 = Switch.MqttSwitch(
+        configParser.get('settings', 'device2_name'),
+        configParser.get('settings', 'device2_topic'),
+        client,
+        configParser.get('settings', 'device2_pin'))
+    switch3 = Switch.MqttSwitch(
+        configParser.get('settings', 'device3_name'),
+        configParser.get('settings', 'device3_topic'),
+        client,
+        configParser.get('settings', 'device3_pin'))
+    switch4 = Switch.MqttSwitch(
+        configParser.get('settings', 'device4_name'),
+        configParser.get('settings', 'device4_topic'),
+        client,
+        configParser.get('settings', 'device4_pin'))
 
     devices = [myGeyser, switch2, switch3, switch4]
 
