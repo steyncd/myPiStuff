@@ -4,7 +4,7 @@ import services.MyMqttService as mqttService
 import models.MqttSwitch as Switch
 from multiprocessing import Pool
 
-#GPIO.VERBOSE = True
+GPIO.VERBOSE = True
 
 try:
     def handle_command(device, topic, payload):
@@ -35,10 +35,10 @@ try:
         elif action == "status":
             print("HandleCommand::Status command received")
             print("HandleCommand::checking " + device.getName() + " status")
-            if GPIO.input(pin) == GPIO.HIGH:
+            if GPIO.input(device.get_pin) == GPIO.HIGH:
                 device.setStatus("Off")
             else:
-                devices.setStatus("On")
+                device.setStatus("On")
             post_status(device)
         else:
             print("ToggleGeyser::Command not recognized")
@@ -72,8 +72,8 @@ try:
 
 
     def on_message(client, userdata, message):
-        print("on_message::message received  ", str(message.payload.decode("utf-8")), \
-              "topic", message.topic, "retained ", message.retain)
+        print("on_message::message received  ", str(message.payload.decode("utf-8")),
+              "topic", message.topic, "retained ", message.retain, " by ", userdata)
         if message.retain == 1:
             print("on_message::This is a retained message")
 
