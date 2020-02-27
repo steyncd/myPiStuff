@@ -57,6 +57,8 @@ try:
         if rc == 0:
             print("on_connect::Successfully connected to HelloLiam MQTT Broker ", rc)
             for device in devices:
+                GPIO.setup(device.get_pin(), GPIO.OUT)
+                device.subscribe_to_topics()
                 if GPIO.input(device.get_pin()) == GPIO.LOW:
                     device.setStatus("On")
                 else:
@@ -104,20 +106,9 @@ try:
     client = queueService.get_client()
 
     myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
-    GPIO.setup(27, GPIO.OUT)
-    myGeyser.subscribe_to_topics()
-
     switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
-    GPIO.setup(22, GPIO.OUT)
-    switch2.subscribe_to_topics()
-
     switch3 = Switch.MqttSwitch("Switch3", "helloliam/switch3/", client, 23)
-    GPIO.setup(23, GPIO.OUT)
-    switch3.subscribe_to_topics()
-
     switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
-    GPIO.setup(24, GPIO.OUT)
-    switch4.subscribe_to_topics()
 
     devices = [myGeyser, switch2, switch3, switch4]
 
