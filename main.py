@@ -1,8 +1,8 @@
+import RPi.GPIO as GPIO
+import configparser
 import services.MyMqttService as mqttService
 import models.MqttSwitch as Switch
 from multiprocessing import Pool
-import RPi.GPIO as GPIO
-import configparser
 
 #GPIO.VERBOSE = True
 
@@ -118,22 +118,22 @@ try:
         configParser.get('settings', 'device1_name'),
         configParser.get('settings', 'device1_topic'),
         client,
-        configParser.get('settings', 'device1_pin'))
+        int(configParser.get('settings', 'device1_pin')))
     switch2 = Switch.MqttSwitch(
         configParser.get('settings', 'device2_name'),
         configParser.get('settings', 'device2_topic'),
         client,
-        configParser.get('settings', 'device2_pin'))
+        int(configParser.get('settings', 'device2_pin')))
     switch3 = Switch.MqttSwitch(
         configParser.get('settings', 'device3_name'),
         configParser.get('settings', 'device3_topic'),
         client,
-        configParser.get('settings', 'device3_pin'))
+        int(configParser.get('settings', 'device3_pin')))
     switch4 = Switch.MqttSwitch(
         configParser.get('settings', 'device4_name'),
         configParser.get('settings', 'device4_topic'),
         client,
-        configParser.get('settings', 'device4_pin'))
+        int(configParser.get('settings', 'device4_pin')))
 
     devices = [myGeyser, switch2, switch3, switch4]
 
