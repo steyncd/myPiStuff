@@ -4,7 +4,7 @@ from multiprocessing import Pool
 import RPi.GPIO as GPIO
 import configparser
 
-GPIO.VERBOSE = True
+#GPIO.VERBOSE = True
 
 try:
     def handle_command(device, topic, payload):
