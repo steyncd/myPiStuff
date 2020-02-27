@@ -7,11 +7,60 @@ import models.MqttSwitch as Switch
 from multiprocessing import Pool
 import RPi.GPIO as GPIO
 
+GPIO.VERBOSE = True
 
-try :
+try:
+    def handle_command(device, topic, payload):
+        action = str(payload.decode("utf-8")).strip().lower()
+        print("handle_command::received command with topic ", topic, "and payload ", payload)
+        if action == "on" or action == "1":
+            GPIO.output(device.get_pin(), GPIO.LOW)
+            print("HandleCommand::on command received")
+            device.getClient().publish(device.getStatusTopic(), "ON")
+            device.setStatus("On")
+            print("HandleCommand::Turning ", device.getName(), " on, pin: " + device.get_pin())
+        elif action == "off" or action == "0":
+            GPIO.output(device.get_pin(), GPIO.HIGH)
+            print("HandleCommand::off command received")
+            device.getClient().publish(device.getStatusTopic(), "Off")
+            device.setStatus("Off")
+            print("HandleCommand::turning " + device.getName() + " off, pin: " + device.get_pin())
+        elif action == "toggle":
+            print("HandleCommand::toggle command received")
+            if GPIO.input(device.get_pin()) == GPIO.HIGH:
+                GPIO.output(device.get_pin(), GPIO.LOW)
+            else:
+                GPIO.output(device.get_pin(), GPIO.HIGH)
+
+            device.setStatus("On" if device.getStatus() == "Off" else "Off")
+            device.getClient().publish(device.getStatusTopic(),device.getStatus())
+            print("HandleCommand::toggling " + device.getName() + " status, pin: " + device.get_pin())
+        elif action == "status":
+            print("HandleCommand::Status command received")
+            print("HandleCommand::checking " + device.getName() + " status")
+            if GPIO.input(pin) == GPIO.HIGH:
+                device.setStatus("Off")
+            else:
+                devices.setStatus("On")
+            post_status(device)
+        else:
+            print("ToggleGeyser::Command not recognized")
+            device.getClient().publish(device.getStatusTopic(), "Unknown action")
+
+
+    def post_status(device):
+        print("PostStatus::Updating the " + device.getName() + " status to " + device.getStatus())
+        device.getClient().publish(device.getStatusTopic(), device.getStatus())
+
+
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
             print("on_connect::Successfully connected to HelloLiam MQTT Broker ", rc)
+            for device in devices:
+                if GPIO.input(device.get_pin()) == GPIO.LOW:
+                    device.setStatus("On")
+                else:
+                    device.setStatus("Off")
             # if __name__ == '__main__':
             #   pool = Pool(processes=1)              # Start a worker processes.
             #   pool.apply_async(myGeyser.PostStatus) #
@@ -31,16 +80,16 @@ try :
 
         if myGeyser.getTopic() in message.topic:
             print("on_message::Topic matches geyser topic")
-            myGeyser.HandleCommand(message.topic, message.payload)
+            handle_command(myGeyser, message.topic, message.payload)
         elif switch2.getTopic() in message.topic:
             print("on_message::Topic matches switch2 topic")
-            switch2.HandleCommand(message.topic, message.payload)
+            handle_command(switch2, message.topic, message.payload)
         elif switch3.getTopic() in message.topic:
             print("on_message::Topic matches switch3 topic")
-            switch3.HandleCommand(message.topic, message.payload)
+            handle_command(switch3, message.topic, message.payload)
         elif switch4.getTopic() in message.topic:
             print("on_message::Topic matches switch4 topic")
-            switch4.HandleCommand(message.topic, message.payload)
+            handle_command(switch4, message.topic, message.payload)
         else:
             print("on_message::Topic not matched to device")
 
@@ -49,25 +98,30 @@ try :
         print("mid: " + str(mid))
 
 
-    queueService = mqttService.MyMqttService("HelloLiam", "127.0.0.1", 1883, "helloliam/", on_connect, on_subscribe,
+    queueService = mqttService.MyMqttService("HelloLiam", "helloliam.co.za", 773, "helloliam/", on_connect, on_subscribe,
                                              on_message, on_publish)
-    queueService.connectToBroker()
-    client = queueService.getClient()
+    queueService.connect_to_broker()
+    client = queueService.get_client()
 
     myGeyser = Switch.MqttSwitch("Geyser", "helloliam/geyser/", client, 27)
-    myGeyser.SubscribeToTopics()
+    GPIO.setup(27, GPIO.OUT)
+    myGeyser.subscribe_to_topics()
 
     switch2 = Switch.MqttSwitch("Switch2", "helloliam/switch2/", client, 22)
-    switch2.SubscribeToTopics()
+    GPIO.setup(22, GPIO.OUT)
+    switch2.subscribe_to_topics()
 
     switch3 = Switch.MqttSwitch("Switch3", "helloliam/switch3/", client, 23)
-    switch3.SubscribeToTopics()
+    GPIO.setup(23, GPIO.OUT)
+    switch3.subscribe_to_topics()
 
     switch4 = Switch.MqttSwitch("Switch4", "helloliam/switch4/", client, 24)
-    switch4.SubscribeToTopics()
+    GPIO.setup(24, GPIO.OUT)
+    switch4.subscribe_to_topics()
+
+    devices = [myGeyser, switch2, switch3, switch4]
+
+    client.loop_forever()
 finally:
     print("Cleaning up GPIO ports")
     GPIO.cleanup()
-
-client.loop_forever()
-
