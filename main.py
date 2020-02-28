@@ -2,9 +2,10 @@ import RPi.GPIO as GPIO
 import configparser
 import services.MyMqttService as mqttService
 import models.MqttSwitch as Switch
-from multiprocessing import Pool
+import paho.mqtt.client as mqtt
+import time
 
-GPIO.VERBOSE = True
+GPIO.VERBOSE = False
 
 try:
     def handle_command(device, topic, payload):
@@ -30,7 +31,7 @@ try:
                 GPIO.output(device.get_pin(), GPIO.HIGH)
 
             device.setStatus("On" if device.getStatus() == "Off" else "Off")
-            device.getClient().publish(device.getStatusTopic(),device.getStatus())
+            device.getClient().publish(device.getStatusTopic(), device.getStatus())
             print("HandleCommand::toggling " + device.getName() + " status, pin: " + device.get_pin())
         elif action == "status":
             print("HandleCommand::Status command received")
@@ -51,20 +52,13 @@ try:
 
 
     def on_connect(client, userdata, flags, rc):
-        if rc == 0:
-            print("on_connect::Successfully connected to HelloLiam MQTT Broker ", rc)
-            for device in devices:
-                GPIO.setup(device.get_pin(), GPIO.OUT)
-                device.subscribe_to_topics()
-                if GPIO.input(device.get_pin()) == GPIO.LOW:
-                    device.setStatus("On")
-                else:
-                    device.setStatus("Off")
-            # if __name__ == '__main__':
-            #   pool = Pool(processes=1)              # Start a worker processes.
-            #   pool.apply_async(myGeyser.PostStatus) #
-        else:
-            print("on_connect::Bad connection Returned code=", rc)
+        try:
+            if rc == 0:
+                print("on_connect::Successfully connected to HelloLiam MQTT Broker ", rc)
+            else:
+                print("on_connect::Bad connection Returned code=", rc)
+        except Exception as err:
+            print("on_connect::Something went wrong - " + err)
 
 
     def on_subscribe():
@@ -94,50 +88,66 @@ try:
 
 
     def on_publish(client, userdata, mid):
-        print("mid: " + str(mid))
+        print("Messaged published: " + str(mid))
 
 
     configParser = configparser.RawConfigParser()
     configFilePath = r'./settings.config'
     configParser.read(configFilePath)
 
-    print(configParser.get('settings', 'mqtt_client'))
-    print(configParser.get('settings', 'mqtt_host'))
-    print(configParser.get('settings', 'mqtt_port'))
+    mqtt_client = mqtt.Client(configParser.get('settings', 'mqtt_client'))
+    mqtt_client.on_connect = on_connect
+    mqtt_client.on_subscribe = on_subscribe
+    mqtt_client.on_message = on_message
+    mqtt_client.on_publish = on_publish
 
-    mqtt_client = configParser.get('settings', 'mqtt_client')
-    mqtt_host = configParser.get('settings', 'mqtt_host')
-    mqtt_port = configParser.get('settings', 'mqtt_port')
+    queueService = mqttService.MyMqttService(
+        mqtt_client,
+        configParser.get('settings', 'mqtt_client'),
+        configParser.get('settings', 'mqtt_host'),
+        int(configParser.get('settings', 'mqtt_port')),
+        configParser.get('settings', 'mqtt_client') + "/")
 
-    queueService = mqttService.MyMqttService(mqtt_client, mqtt_host, int(mqtt_port), mqtt_client+"/", on_connect, on_subscribe, on_message, on_publish)
-
-    queueService.connect_to_broker()
-    client = queueService.get_client()
+    time.sleep(4)
 
     myGeyser = Switch.MqttSwitch(
         configParser.get('settings', 'device1_name'),
         configParser.get('settings', 'device1_topic'),
-        client,
+        mqtt_client,
         int(configParser.get('settings', 'device1_pin')))
     switch2 = Switch.MqttSwitch(
         configParser.get('settings', 'device2_name'),
         configParser.get('settings', 'device2_topic'),
-        client,
+        mqtt_client,
         int(configParser.get('settings', 'device2_pin')))
     switch3 = Switch.MqttSwitch(
         configParser.get('settings', 'device3_name'),
         configParser.get('settings', 'device3_topic'),
-        client,
+        mqtt_client,
         int(configParser.get('settings', 'device3_pin')))
     switch4 = Switch.MqttSwitch(
         configParser.get('settings', 'device4_name'),
         configParser.get('settings', 'device4_topic'),
-        client,
+        mqtt_client,
         int(configParser.get('settings', 'device4_pin')))
 
     devices = [myGeyser, switch2, switch3, switch4]
 
-    client.loop_forever()
+    for this_device in devices:
+        GPIO.setup(this_device.get_pin(), GPIO.OUT)
+        this_device.subscribe_to_topics()
+        if GPIO.input(this_device.get_pin()) == GPIO.LOW:
+            this_device.setStatus("On")
+        else:
+            this_device.setStatus("Off")
+
+    while True:
+        if not queueService.get_connected():
+            print("I am not connected...but I am probably still trying.")
+        # else:
+        #    print("I am not connected...but I am probably still trying.")
+
+        time.sleep(15)
 finally:
     print("Cleaning up GPIO ports")
     GPIO.cleanup()
