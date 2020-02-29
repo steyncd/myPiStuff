@@ -12,7 +12,7 @@ g.setup(24, g.OUT)
 g.setup(10, g.IN, pull_up_down=g.PUD_DOWN)
 g.setup(9, g.IN, pull_up_down=g.PUD_DOWN)
 
-devices = [27,22,23,24]
+devices = [27, 22, 23, 24]
 
 for device in devices:
     g.output(device, 1)
@@ -56,22 +56,24 @@ def toggleLights():
 
     toggleLightRunning = False
 
+
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Hello, Connected to MQTT Broker")
+
 
 def on_message(client, userdata, message):
     print("message received")
 
 
 client = mqtt.Client("HelloGeyser")
-client.connect("127.0.0.1",1883)
+client.connect("127.0.0.1", 1883)
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.publish("helloliam/geyser/connection","Hello! I am connected")
+client.publish("helloliam/geyser/connection", "Hello! I am connected")
 client.subscribe("helloliam/geyser/cmnd")
-
+client.loop_start()
 
 while True:
     if g.input(10) == g.HIGH:
@@ -89,4 +91,3 @@ while True:
         toggleLights()
 
 g.cleanup()
-
