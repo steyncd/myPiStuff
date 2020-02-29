@@ -1,0 +1,24 @@
+import RPi.GPIO as g
+import time as t
+
+g.setmode(g.BCM)
+
+g.setup(27,g.OUT)
+g.setup(22,g.OUT)
+g.setup(23,g.OUT)
+g.setup(24,g.OUT)
+
+devices = [27,22,23,24]
+
+print("Strting first loop")
+action = 0
+for i in range(10):
+    for device in devices:
+        g.output(device,action)
+        t.sleep(1)
+
+    devices.reverse()
+    action = 0 if action == 1 else 0
+
+
+g.cleanup()
