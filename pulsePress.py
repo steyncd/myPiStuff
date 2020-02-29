@@ -89,18 +89,22 @@ def on_message(client, userdata, message):
     elif action == "status":
         print("HandleCommand::Status command received")
         print("HandleCommand::checking status")
-        if g.input(device.get_pin) == GPIO.HIGH:
+        if g.input(27) == g.HIGH:
             client.publish("helloliam/geyser/status", "OFF")
         else:
             client.publish("helloliam/geyser/status", "ON")
     elif action == "pulse":
         startLoop()
     elif action == "allon":
-        for device in devices:
-            g.output(device, 0)
+        g.output(27, 0)
+        g.output(22, 0)
+        g.output(23, 0)
+        g.output(24, 0)
     elif action == "alloff":
-        for device in devices:
-            g.output(device, 1)
+        g.output(27, 1)
+        g.output(22, 1)
+        g.output(23, 1)
+        g.output(24, 1)
     else:
         print("ToggleGeyser::Command not recognized")
         client.publish("helloliam/geyser/status", "Unknown action")
