@@ -63,7 +63,46 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    print("message received")
+    action = str(message.payload.decode("utf-8")).strip().lower()
+    print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
+    if action == "on" or action == "1":
+        g.output(27, g.LOW)
+        print("HandleCommand::on command received")
+        client.publish("helloliam/geyser/status", "ON")
+        print("HandleCommand::Turning HelloGeyser on")
+    elif action == "off" or action == "0":
+        g.output(27, g.HIGH)
+        print("HandleCommand::off command received")
+        client.publish("helloliam/geyser/status", "OFF")
+        print("HandleCommand::Turning HelloGeyser off")
+    elif action == "toggle":
+        print("HandleCommand::toggle command received")
+        if g.input(27) == g.HIGH:
+            g.output(27, g.LOW)
+            client.publish("helloliam/geyser/status", "ON")
+        else:
+            g.output(27, g.HIGH)
+            client.publish("helloliam/geyser/status", "OFF")
+
+        print("HandleCommand::toggling HelloGeyser status")
+    elif action == "status":
+        print("HandleCommand::Status command received")
+        print("HandleCommand::checking status")
+        if g.input(device.get_pin) == GPIO.HIGH:
+            client.publish("helloliam/geyser/status", "OFF")
+        else:
+            client.publish("helloliam/geyser/status", "ON")
+    elif action == "pulse":
+        startLoop()
+    elif action == "allon":
+        for device in devices:
+            g.output(device, 0)
+    elif action == "alloff":
+        for device in devices:
+            g.output(device, 1)
+    else:
+        print("ToggleGeyser::Command not recognized")
+        client.publish("helloliam/geyser/status", "Unknown action")
 
 
 client = mqtt.Client("HelloGeyser")
