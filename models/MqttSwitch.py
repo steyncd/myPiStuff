@@ -8,6 +8,7 @@ class MqttSwitch(MqttDevice.MqttDevice):
 
     def subscribe_to_topics(self):
         self.getClient().subscribe(self.getCommandTopic())
+        self.getClient().publish(self.getConnectionTopic(), "Hello, I am connected!")
 
     def get_pin(self):
         return self.__pin
