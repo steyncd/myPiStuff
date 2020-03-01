@@ -182,27 +182,31 @@ def getTimerSettings():
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
 
-    days1 = config.get('timer','days1')
-    start1 = config.get('timer','start1')
-    end1 = config.get('timer','end1')
+    print("getting schedule 1 values")
+    days1 = config.get('timer', 'days1')
+    start1 = config.get('timer', 'start1')
+    end1 = config.get('timer', 'end1')
 
-    days2 = config.get('timer','days2')
-    start2 = config.get('timer','start2')
-    end2 = config.get('timer','end2')
+    print("getting schedule 2 values")
+    days2 = config.get('timer', 'days2')
+    start2 = config.get('timer', 'start2')
+    end2 = config.get('timer', 'end2')
 
-    days3 = config.get('timer','days3')
-    start3 = config.get('timer','start3')
-    end3 = config.get('timer','end3')
+    print("getting schedule 3 values")
+    days3 = config.get('timer', 'days3')
+    start3 = config.get('timer', 'start3')
+    end3 = config.get('timer', 'end3')
 
-    days4 = config.get('timer','days4')
-    start4 = config.get('timer','start4')
-    end4 = config.get('timer','end4')
+    print("getting schedule 4 values")
+    days4 = config.get('timer', 'days4')
+    start4 = config.get('timer', 'start4')
+    end4 = config.get('timer', 'end4')
 
     print("publishing timer settings")
-    payload = "\"Schedule 1\": \"Days: "+str(days1)+", Start: " + str(start1) + ", End: " + str(end1) + "\""
-    payload = payload + "," + "\"Schedule 2\": \"Days: "+str(days2)+", Start: " + str(start2) + ", End: " + str(end2) + "\""
-    payload = payload + "," + "\"Schedule 3\": \"Days: "+str(days3)+", Start: " + str(start3) + ", End: " + str(end3) + "\""
-    payload = payload + "," + "\"Schedule 4\": \"Days: "+str(days4)+", Start: " + str(start4) + ", End: " + str(end4) + "\""
+    payload = "\"Schedule 1\": \"Days: " + str(days1) + ", Start: " + str(start1) + ", End: " + str(end1) + "\""
+    payload = payload + "," + "\"Schedule 2\": \"Days: " + str(days2) + ", Start: " + str(start2) + ", End: " + str(end2) + "\""
+    payload = payload + "," + "\"Schedule 3\": \"Days: " + str(days3) + ", Start: " + str(start3) + ", End: " + str(end3) + "\""
+    payload = payload + "," + "\"Schedule 4\": \"Days: " + str(days4) + ", Start: " + str(start4) + ", End: " + str(end4) + "\""
     client.publish("helloliam/geyser/timer", payload)
 
 
