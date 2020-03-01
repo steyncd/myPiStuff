@@ -281,7 +281,7 @@ while True:
             'cpu_speed': str(get_cpu_speed())
         }
 
-        client.publish("helloliam/geyser/hoststatus", hoststatus)
+        # client.publish("helloliam/geyser/hoststatus", hoststatus)
 
     # runTimer()
 
