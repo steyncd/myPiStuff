@@ -188,7 +188,7 @@ print('Nr. of processes: ' + str(get_process_count()))
 print('Up time: ' + get_up_stats()[0])
 print('Nr. of connections: ' + str(get_connections()))
 print('Temperature in C: ' + str(get_temperature()))
-print('IP-address: ' + get_ipaddress())
+print('IP-address: ' + str(get_ipaddress()))
 print('CPU speed: ' + str(get_cpu_speed()))
 
 while True:
