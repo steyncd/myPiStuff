@@ -69,54 +69,64 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    action = str(message.payload.decode("utf-8")).strip().lower()
-    print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
-    client.publish("helloliam/geyser/lastcommand", action)
-    if action == "on" or action == "1":
-        g.output(27, g.LOW)
-        print("HandleCommand::on command received")
-        client.publish("helloliam/geyser/status", "ON")
-        print("HandleCommand::Turning HelloGeyser on")
-    elif action == "off" or action == "0":
-        g.output(27, g.HIGH)
-        print("HandleCommand::off command received")
-        client.publish("helloliam/geyser/status", "OFF")
-        print("HandleCommand::Turning HelloGeyser off")
-    elif action == "toggle":
-        print("HandleCommand::toggle command received")
-        if g.input(27) == g.HIGH:
-            g.output(27, g.LOW)
-            client.publish("helloliam/geyser/status", "ON")
-        else:
-            g.output(27, g.HIGH)
-            client.publish("helloliam/geyser/status", "OFF")
-
-        print("HandleCommand::toggling HelloGeyser status")
-    elif action == "status":
-        print("HandleCommand::Status command received")
-        print("HandleCommand::checking status")
-        if g.input(27) == g.HIGH:
-            client.publish("helloliam/geyser/status", "OFF")
-        else:
-            client.publish("helloliam/geyser/status", "ON")
-    elif action == "gettimer":
-        print("HandleCommand::gettimer command received")
-        client.publish("helloliam/geyser/timer", json.dumps(parseTimer()))
-    elif action == "pulse":
-        startLoop()
-    elif action == "allon":
-        g.output(27, 0)
-        g.output(22, 0)
-        g.output(23, 0)
-        g.output(24, 0)
-    elif action == "alloff":
-        g.output(27, 1)
-        g.output(22, 1)
-        g.output(23, 1)
-        g.output(24, 1)
+    if "helloliam/geyser/timer" in message.topic:
+        if message.topic == "helloliam/geyser/timer/1":
+            updateTimerSettings(1, message.payload)
+        elif message.topic == "helloliam/geyser/timer/2":
+            updateTimerSettings(2, message.payload)
+        elif message.topic == "helloliam/geyser/timer/3":
+            updateTimerSettings(3, message.payload)
+        elif message.topic == "helloliam/geyser/timer/4":
+            updateTimerSettings(4, message.payload)
     else:
-        print("ToggleGeyser::Command not recognized")
-        client.publish("helloliam/geyser/status", "Unknown action")
+        action = str(message.payload.decode("utf-8")).strip().lower()
+        print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
+        client.publish("helloliam/geyser/lastcommand", action)
+        if action == "on" or action == "1":
+            g.output(27, g.LOW)
+            print("HandleCommand::on command received")
+            client.publish("helloliam/geyser/status", "ON")
+            print("HandleCommand::Turning HelloGeyser on")
+        elif action == "off" or action == "0":
+            g.output(27, g.HIGH)
+            print("HandleCommand::off command received")
+            client.publish("helloliam/geyser/status", "OFF")
+            print("HandleCommand::Turning HelloGeyser off")
+        elif action == "toggle":
+            print("HandleCommand::toggle command received")
+            if g.input(27) == g.HIGH:
+                g.output(27, g.LOW)
+                client.publish("helloliam/geyser/status", "ON")
+            else:
+                g.output(27, g.HIGH)
+                client.publish("helloliam/geyser/status", "OFF")
+
+            print("HandleCommand::toggling HelloGeyser status")
+        elif action == "status":
+            print("HandleCommand::Status command received")
+            print("HandleCommand::checking status")
+            if g.input(27) == g.HIGH:
+                client.publish("helloliam/geyser/status", "OFF")
+            else:
+                client.publish("helloliam/geyser/status", "ON")
+        elif action == "gettimer":
+            print("HandleCommand::gettimer command received")
+            client.publish("helloliam/geyser/timer", json.dumps(parseTimer()))
+        elif action == "pulse":
+            startLoop()
+        elif action == "allon":
+            g.output(27, 0)
+            g.output(22, 0)
+            g.output(23, 0)
+            g.output(24, 0)
+        elif action == "alloff":
+            g.output(27, 1)
+            g.output(22, 1)
+            g.output(23, 1)
+            g.output(24, 1)
+        else:
+            print("ToggleGeyser::Command not recognized")
+            client.publish("helloliam/geyser/status", "Unknown action")
 
 
 def get_ram():
@@ -214,8 +224,17 @@ def parseTimer():
     return timer
 
 
-def updateTimerSettings(payload):
+def updateTimerSettings(i, payload):
+    print("Updating time settings for schedule " + i + ": " + payload)
     timer = parseTimer()
+    config = configparser.ConfigParser()
+    config.read(r'./timer.config')
+
+    newschedule = json.loads(payload)
+    config["Schedule"+i+"Enabled"] = newschedule["Enabled"]
+    config["days"+i] = newschedule["Days"]
+    config["start"+i] = newschedule["Start"]
+    config["stop"+i] = newschedule["Stop"]
 
     with open('timer.config', 'w') as configfile:
         config.write(configfile)
@@ -246,6 +265,10 @@ client.on_message = on_message
 
 client.publish("helloliam/geyser/connection", "Hello! I am connected")
 client.subscribe("helloliam/geyser/cmnd")
+client.subscribe("helloliam/geyser/timer/1")
+client.subscribe("helloliam/geyser/timer/2")
+client.subscribe("helloliam/geyser/timer/3")
+client.subscribe("helloliam/geyser/timer/4")
 client.loop_start()
 
 print('Free RAM: ' + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')')
