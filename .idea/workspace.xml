@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="63fec1db-b548-408b-8228-a3ee433d3f99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pulsePress.py" beforeDir="false" afterPath="$PROJECT_DIR$/pulsePress.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/timer.config" beforeDir="false" afterPath="$PROJECT_DIR$/timer.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583050080475</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fixed timer json payload">
+      <created>1583056194386</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1583056194386</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -357,10 +363,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583050081843">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583056196790">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583050081843" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583056196790" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
