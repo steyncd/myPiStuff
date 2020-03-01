@@ -225,7 +225,6 @@ def runTimer():
 
     for i in range(1, 5):
         schedule = "Schedule " + str(i)
-        print("Enabled? " + timer[schedule]["Enabled"] + " current day " + t.strftime("%w") + timer["Schedule " + str(i)]["Days"])
         if timer[schedule]["Enabled"] == "True" and t.strftime("%w") in timer["Schedule " + str(i)]["Days"]:
             print(schedule + " enabled and matched day")
             start_time = timer["Schedule " + str(i)]["Start"].split(":")
