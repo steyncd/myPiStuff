@@ -164,7 +164,7 @@ def get_ipaddress():
     p = subprocess.Popen(arg, shell=True, stdout=subprocess.PIPE)
     data = p.communicate()
     split_data = data[0].split()
-    ipaddr = split_data[split_data.index('src') + 1]
+    ipaddr = split_data[split_data.index(b'src') + 1]
     return ipaddr
 
 
