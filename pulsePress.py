@@ -69,7 +69,9 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
+    print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
     if "helloliam/geyser/timer" in message.topic:
+        print("geyser timer update command received")
         if message.topic == "helloliam/geyser/timer/1":
             updateTimerSettings(1, message.payload)
         elif message.topic == "helloliam/geyser/timer/2":
@@ -80,7 +82,6 @@ def on_message(client, userdata, message):
             updateTimerSettings(4, message.payload)
     else:
         action = str(message.payload.decode("utf-8")).strip().lower()
-        print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
         client.publish("helloliam/geyser/lastcommand", action)
         if action == "on" or action == "1":
             g.output(27, g.LOW)
