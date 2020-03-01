@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63fec1db-b548-408b-8228-a3ee433d3f99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timer.config" beforeDir="false" afterPath="$PROJECT_DIR$/timer.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pulsePress.py" beforeDir="false" afterPath="$PROJECT_DIR$/pulsePress.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +41,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.pulsePress">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="myPiStuff" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -63,6 +63,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="pulsePress" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="myPiStuff" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pulsePress.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.pulsePress" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -355,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583071163258</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="fixed timer config">
+      <created>1583071339199</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1583071339199</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -393,10 +426,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="116" key="#main/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780585816" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583071162565">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583071336670">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583071162565" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583071336670" />
     <state width="476" height="466" key="DebuggerActiveHint" timestamp="1582890756928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -406,30 +439,30 @@
     </state>
     <state x="739" y="261" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780685899" />
     <state x="2659" y="261" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582526625613" />
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom" timestamp="1583039663533">
+    <state width="1515" height="374" key="GridCell.Tab.0.bottom" timestamp="1583071607708">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1899" height="354" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582890825882" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582522432666" />
-    <state width="1515" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583039663533" />
-    <state width="1515" height="261" key="GridCell.Tab.0.center" timestamp="1583039663533">
+    <state width="1515" height="374" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583071607708" />
+    <state width="1515" height="374" key="GridCell.Tab.0.center" timestamp="1583071607708">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1899" height="354" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582890825882" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582522432666" />
-    <state width="1515" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583039663533" />
-    <state width="1515" height="261" key="GridCell.Tab.0.left" timestamp="1583039663532">
+    <state width="1515" height="374" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583071607708" />
+    <state width="1515" height="374" key="GridCell.Tab.0.left" timestamp="1583071607708">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1899" height="354" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582890825882" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582522432666" />
-    <state width="1515" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583039663532" />
-    <state width="1515" height="261" key="GridCell.Tab.0.right" timestamp="1583039663533">
+    <state width="1515" height="374" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583071607708" />
+    <state width="1515" height="374" key="GridCell.Tab.0.right" timestamp="1583071607708">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1899" height="354" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582890825882" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582522432666" />
-    <state width="1515" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583039663533" />
+    <state width="1515" height="374" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583071607708" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1583039663533">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -455,10 +488,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583071164628">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583071340343">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583071164628" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583071340343" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

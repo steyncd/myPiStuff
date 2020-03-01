@@ -10,6 +10,7 @@ import json
 g.setwarnings(False)
 g.setmode(g.BCM)
 
+
 g.setup(27, g.OUT)
 g.setup(22, g.OUT)
 g.setup(23, g.OUT)
@@ -225,7 +226,7 @@ def runTimer():
 
     for i in range(1, 5):
         schedule = "Schedule " + str(i)
-        if timer[schedule]["Enabled"] == "True" and t.strftime("%w") in timer[schedule]["Days"]:
+        if timer[schedule]["Enabled"] and t.strftime("%w") in timer[schedule]["Days"]:
             print(schedule + " enabled and matched day")
             start_time = timer[schedule]["Start"].split(":")
             stop_time = timer[schedule]["Stop"].split(":")
@@ -240,7 +241,7 @@ def runTimer():
 
 
 client = mqtt.Client("HelloGeyser")
-client.connect("127.0.0.1", 1883)
+client.connect("192.168.0.71", 1883)
 client.on_connect = on_connect
 client.on_message = on_message
 
