@@ -225,14 +225,17 @@ def runTimer():
 
     for i in range(1, 5):
         if timer["Schedule " + str(i)]["Enabled"] == "True" and t.strftime("%w") in timer["Schedule " + str(i)]["Days"]:
+            print("Schedule " + str(i) + " enabled and matched day")
             start_time = timer["Schedule " + str(i)]["Start"].split(b":")
             stop_time = timer["Schedule " + str(i)]["Stop"].split(b":")
             if t.strftime("%H") == start_time[0] and t.strftime("%M") == start_time[1]:
+                print("Start hour and minute match")
                 g.output(27, g.LOW)
+                t.sleep(60)
             elif t.strftime("%H") == stop_time[0] and t.strftime("%M") == stop_time[1]:
+                print("Stop hour and minute match")
                 g.output(27, g.HIGH)
-
-    t.sleep(60)
+                t.sleep(60)
 
 
 client = mqtt.Client("HelloGeyser")
