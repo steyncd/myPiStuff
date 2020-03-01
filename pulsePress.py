@@ -203,10 +203,10 @@ def getTimerSettings():
     stop4 = config.get('timer', 'stop4')
 
     print("publishing timer settings")
-    payload = "\"Schedule 1\": \"Days: " + str(days1) + ", Start: " + str(start1) + ", stop: " + str(stop1) + "\""
-    payload = payload + "," + "\"Schedule 2\": \"Days: " + str(days2) + ", Start: " + str(start2) + ", Stop: " + str(stop2) + "\""
-    payload = payload + "," + "\"Schedule 3\": \"Days: " + str(days3) + ", Start: " + str(start3) + ", Stop: " + str(stop3) + "\""
-    payload = payload + "," + "\"Schedule 4\": \"Days: " + str(days4) + ", Start: " + str(start4) + ", Stop: " + str(stop4) + "\""
+    payload = "[{\"Schedule 1\": \"Days: " + str(days1) + ", Start: " + str(start1) + ", stop: " + str(stop1) + "\"}"
+    payload = payload + "," + "{\"Schedule 2\": \"Days: " + str(days2) + ", Start: " + str(start2) + ", Stop: " + str(stop2) + "\"}"
+    payload = payload + "," + "{\"Schedule 3\": \"Days: " + str(days3) + ", Start: " + str(start3) + ", Stop: " + str(stop3) + "\"}"
+    payload = payload + "," + "{\"Schedule 4\": \"Days: " + str(days4) + ", Start: " + str(start4) + ", Stop: " + str(stop4) + "\"}]"
     client.publish("helloliam/geyser/timer", payload)
 
 
