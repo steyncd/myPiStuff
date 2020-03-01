@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63fec1db-b548-408b-8228-a3ee433d3f99" name="Default Changelist" comment="">
+    <list default="true" id="63fec1db-b548-408b-8228-a3ee433d3f99" name="Default Changelist" comment="fixed timer json payload">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pulsePress.py" beforeDir="false" afterPath="$PROJECT_DIR$/pulsePress.py" afterDir="false" />
     </list>
@@ -236,7 +236,21 @@
       <option name="project" value="LOCAL" />
       <updated>1583049658258</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed timer json payload">
+      <created>1583049839232</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1583049839232</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fixed timer json payload">
+      <created>1583049959151</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1583049959151</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -273,10 +287,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="116" key="#main/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780585816" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583049836100">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583050070325">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583049836100" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583050070325" />
     <state width="476" height="466" key="DebuggerActiveHint" timestamp="1582890756928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -335,10 +349,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583049840521">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583049960338">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583049840521" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583049960338" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
