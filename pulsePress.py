@@ -199,10 +199,10 @@ def getTimerSettings():
     end4 = config.get('timer','end4')
 
     print("publishing timer settings")
-    payload = "\"Schedule 1\": \"Days: "+days1+", Start: " + str(start1) + ", End: " + str(end1) + "\""
-    payload = payload + "," + "\"Schedule 2\": \"Days: "+days2+", Start: " + str(start2) + ", End: " + str(end2) + "\""
-    payload = payload + "," + "\"Schedule 3\": \"Days: "+days3+", Start: " + str(start3) + ", End: " + str(end3) + "\""
-    payload = payload + "," + "\"Schedule 4\": \"Days: "+days4+", Start: " + str(start4) + ", End: " + str(end4) + "\""
+    payload = "\"Schedule 1\": \"Days: "+str(days1)+", Start: " + str(start1) + ", End: " + str(end1) + "\""
+    payload = payload + "," + "\"Schedule 2\": \"Days: "+str(days2)+", Start: " + str(start2) + ", End: " + str(end2) + "\""
+    payload = payload + "," + "\"Schedule 3\": \"Days: "+str(days3)+", Start: " + str(start3) + ", End: " + str(end3) + "\""
+    payload = payload + "," + "\"Schedule 4\": \"Days: "+str(days4)+", Start: " + str(start4) + ", End: " + str(end4) + "\""
     client.publish("helloliam/geyser/timer", payload)
 
 
