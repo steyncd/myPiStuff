@@ -274,42 +274,36 @@ client.subscribe("helloliam/geyser/timer/3")
 client.subscribe("helloliam/geyser/timer/4")
 client.loop_start()
 
-# print('Free RAM: ' + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')')
-# print('Nr. of processes: ' + str(get_process_count()))
-# print('Up time: ' + str(get_up_stats()[0].decode("utf-8")))
-# print('Nr. of connections: ' + str(get_connections()))
-# print('Temperature in C: ' + str(get_temperature()))
-# print('IP-address: ' + str(get_ipaddress().decode("utf-8")))
-# print('CPU speed: ' + str(get_cpu_speed()))
+print('Free RAM: ' + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')')
+print('Nr. of processes: ' + str(get_process_count()))
+print('Up time: ' + str(get_up_stats()[0].decode("utf-8")))
+print('Nr. of connections: ' + str(get_connections()))
+print('Temperature in C: ' + str(get_temperature()))
+print('IP-address: ' + str(get_ipaddress().decode("utf-8")))
+print('CPU speed: ' + str(get_cpu_speed()))
 
 while True:
-    # if g.input(10) == g.HIGH:
-    t.sleep(1)
-    #
-    # if g.input(10) == g.HIGH and not startLoopRunning:
-    #     print("starting loop")
-    #     startLoop()
-    #
-    # if g.input(9) == g.HIGH:
-    #     print("toggle button pressed")
-    #
-    # if g.input(9) == g.HIGH and not toggleLightRunning:
-    #     print("toggling lights")
-    #     toggleLights()
-    #
-    # if int(t.strftime("%M")) % 2 == 0:
-    #     hoststatus = {
-    #         'free_memory': str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')',
-    #         'processes': str(get_process_count()),
-    #         'up_time': str(get_up_stats()[0].decode("utf-8")),
-    #         'connection_count': str(get_connections()),
-    #         'temperature': str(get_temperature()),
-    #         'ip_address': str(get_ipaddress().decode("utf-8")),
-    #         'cpu_speed': str(get_cpu_speed())
-    #     }
-    #
-    #     client.publish("helloliam/geyser/hoststatus", json.dumps(hoststatus))
-    #
-    # runTimer()
+    if g.input(10) == g.HIGH and not startLoopRunning:
+        print("starting loop")
+        startLoop()
+
+    if g.input(9) == g.HIGH and not toggleLightRunning:
+        print("toggling lights")
+        toggleLights()
+
+    if int(t.strftime("%M")) % 2 == 0:
+        hoststatus = {
+            'free_memory': str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')',
+            'processes': str(get_process_count()),
+            'up_time': str(get_up_stats()[0].decode("utf-8")),
+            'connection_count': str(get_connections()),
+            'temperature': str(get_temperature()),
+            'ip_address': str(get_ipaddress().decode("utf-8")),
+            'cpu_speed': str(get_cpu_speed())
+        }
+
+        client.publish("helloliam/geyser/hoststatus", json.dumps(hoststatus))
+
+    runTimer()
 
 g.cleanup()
