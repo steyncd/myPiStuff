@@ -116,8 +116,8 @@ def on_message(client, userdata, message):
 def get_ram():
     try:
         s = subprocess.check_output(["free", "-m"])
-        lines = s.split('\n')
-        return int(lines[1].split()[1]), int(lines[2].split()[3])
+        lines = s.splitlines()
+        return (int(lines[1].split()[1]), int(lines[2].split()[3]))
     except:
         return 0
 
@@ -125,7 +125,7 @@ def get_ram():
 def get_process_count():
     try:
         s = subprocess.check_output(["ps", "-e"])
-        return len(s.split('\n'))
+        return len(s.splitlines())
     except:
         return 0
 
