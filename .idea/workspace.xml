@@ -222,7 +222,21 @@
       <option name="project" value="LOCAL" />
       <updated>1583049391356</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="timer stuff">
+      <created>1583049562844</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1583049562844</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fixed timer json payload">
+      <created>1583049658258</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1583049658258</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -238,7 +252,8 @@
     <MESSAGE value="small fixes" />
     <MESSAGE value="formatting fixes" />
     <MESSAGE value="timer stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="timer stuff" />
+    <MESSAGE value="fixed timer json payload" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed timer json payload" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" width="1092" height="707" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582780613667">
@@ -258,10 +273,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="116" key="#main/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780585816" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583049559494">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583049655178">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583049559494" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583049655178" />
     <state width="476" height="466" key="DebuggerActiveHint" timestamp="1582890756928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -320,10 +335,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583049564328">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583049660156">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583049564328" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583049660156" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
