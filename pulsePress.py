@@ -229,10 +229,10 @@ def runTimer():
             stop_time = timer["Schedule " + str(i)]["Stop"].split(b":")
             if t.strftime("%H") == start_time[0] and t.strftime("%M") == start_time[1]:
                 g.output(27, g.LOW)
-                t.sleep(60)
             elif t.strftime("%H") == stop_time[0] and t.strftime("%M") == stop_time[1]:
                 g.output(27, g.HIGH)
-                t.sleep(60)
+
+    t.sleep(60)
 
 
 client = mqtt.Client("HelloGeyser")
