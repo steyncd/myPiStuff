@@ -185,25 +185,25 @@ def getTimerSettings():
 
     timer = {
         "Schedule 1": {
-            "Enabled": config.get("timer","Schedule1Enabled"),
+            "Enabled": config.get("timer","Schedule1Enabled") == "True",
             "Days": config.get("timer","days1"),
             "Start": config.get("timer","start1"),
             "Stop": config.get("timer","stop1")
         },
         "Schedule 2": {
-            "Enabled": config.get("timer","Schedule2Enabled"),
+            "Enabled": config.get("timer","Schedule2Enabled") == "True",
             "Days": config.get("timer", "days2"),
             "Start": config.get("timer", "start2"),
             "Stop": config.get("timer", "stop2")
         },
         "Schedule 3": {
-            "Enabled": config.get("timer","Schedule3Enabled"),
+            "Enabled": config.get("timer","Schedule3Enabled") == "True",
             "Days": config.get("timer", "days3"),
             "Start": config.get("timer", "start3"),
             "Stop": config.get("timer", "stop3")
         },
         "Schedule 4": {
-            "Enabled": config.get("timer","Schedule4Enabled"),
+            "Enabled": config.get("timer","Schedule4Enabled") == "True",
             "Days": config.get("timer", "days4"),
             "Start": config.get("timer", "start4"),
             "Stop": config.get("timer", "stop4")
