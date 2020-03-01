@@ -232,15 +232,16 @@ def parseTimer():
 def updateTimerSettings(i, payload):
     print("Updating time settings for schedule " + i + ": " + payload)
     newschedule = json.loads(payload)
+    print("payload parsed - Enabled: " + newschedule["Enabled"] + ", Days: " + newschedule["Days"] + ", Start: " + newschedule["Start"] + ", Stop: " +newschedule["Stop"] )
 
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
-
+    print("read config")
     config["Schedule"+i+"Enabled"] = newschedule["Enabled"]
     config["days"+i] = newschedule["Days"]
     config["start"+i] = newschedule["Start"]
     config["stop"+i] = newschedule["Stop"]
-
+    print("set values...updating config")
     with open('timer.config', 'w') as configfile:
         config.write(configfile)
 
