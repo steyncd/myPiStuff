@@ -133,10 +133,10 @@ def get_process_count():
 def get_up_stats():
     try:
         s = subprocess.check_output(["uptime"])
-        load_split = s.split('load average: ')
-        load_five = float(load_split[1].split(', ')[1])
+        load_split = s.split(b'load average: ')
+        load_five = float(load_split[1].split(b', ')[1])
         up = load_split[0]
-        up_pos = up.rfind(', ', 0, len(up) - 4)
+        up_pos = up.rfind(b', ', 0, len(up) - 4)
         up = up[:up_pos].split(b'up ')[1]
         return (up, load_five)
     except:
@@ -146,7 +146,7 @@ def get_up_stats():
 def get_connections():
     try:
         s = subprocess.check_output(["netstat", "-tun"])
-        return len([x for x in s.split() if x == 'ESTABLISHED'])
+        return len([x for x in s.split() if x == b'ESTABLISHED'])
     except:
         return 0
 
@@ -213,8 +213,8 @@ while True:
                                                       "\"uptime\":\"" + str(get_up_stats()) + "\","
                                                       "\"connections\":\"" + str(get_connections()) + "\","
                                                       "\"temperature\":\"" + str(get_temperature()) + "\","
-                                                      "\"ipaddress\":\"" + str(get_ipaddress()) + "\","
-                                                      "\"cpuspeed\":\"" + str(get_cpu_speed()) + "\","
+                                                      "\"ipaddress\":\"" + str(get_ipaddress().decode("utf-8")) + "\","
+                                                      "\"cpuspeed\":\"" + str(get_cpu_speed()) + "\""
                                                       "}")
 
 g.cleanup()
