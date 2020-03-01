@@ -73,13 +73,17 @@ def on_message(client, userdata, message):
     if "helloliam/geyser/timer" in message.topic:
         print("geyser timer update command received")
         if message.topic == "helloliam/geyser/timer/1":
-            updateTimerSettings(1, str(message.payload.decode("utf-8")).strip().lower())
+            print("Received update for schedule 1")
+            updateTimerSettings(1, str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/2":
-            updateTimerSettings(2, str(message.payload.decode("utf-8")).strip().lower())
+            print("Received update for schedule 2")
+            updateTimerSettings(2, str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/3":
-            updateTimerSettings(3, str(message.payload.decode("utf-8")).strip().lower())
+            print("Received update for schedule 3")
+            updateTimerSettings(3, str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/4":
-            updateTimerSettings(4, str(message.payload.decode("utf-8")).strip().lower())
+            print("Received update for schedule 4")
+            updateTimerSettings(4, str(message.payload.decode("utf-8")))
     else:
         action = str(message.payload.decode("utf-8")).strip().lower()
         client.publish("helloliam/geyser/lastcommand", action)
