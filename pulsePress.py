@@ -1,3 +1,4 @@
+import sys
 import RPi.GPIO as g
 import time as t
 import paho.mqtt.client as mqtt
@@ -65,7 +66,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, message):
     action = str(message.payload.decode("utf-8")).strip().lower()
     print("handle_command::received command with topic ", message.topic, "and payload ", message.payload)
-    client.publish("helloliam/geyser/lastcommand",action)
+    client.publish("helloliam/geyser/lastcommand", action)
     if action == "on" or action == "1":
         g.output(27, g.LOW)
         print("HandleCommand::on command received")
@@ -133,5 +134,8 @@ while True:
     if g.input(9) == g.HIGH and not toggleLightRunning:
         print("toggling lights")
         toggleLights()
+
+    if int(t.strftime("%M")) % 2 == 0:
+        client.publish("helloliam/geyser/hoststatus", sys.api_version)
 
 g.cleanup()
