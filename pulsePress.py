@@ -179,14 +179,18 @@ def get_cpu_speed():
 
 
 def getTimerSettings():
+    print("getting timer settings")
     config = configparser.ConfigParser()
+    print("reading timer config")
     config.read(r'./timer.config')
 
+    print("retrieving timer values")
     timer = config['timer']
     days1 = timer["days1"]
     start1 = timer["start1"]
     end1 = timer["end1"]
 
+    print("publishing timer settings")
     client.publish("helloliam/geyser/timer", "Schedule 1 - Days: , Start: " + str(start1) + ", End: " + str(end1))
 
 
