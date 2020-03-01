@@ -137,8 +137,8 @@ def get_up_stats():
         load_five = float(load_split[1].split(', ')[1])
         up = load_split[0]
         up_pos = up.rfind(', ', 0, len(up) - 4)
-        up = up[:up_pos].split('up ')[1]
-        return up, load_five
+        up = up[:up_pos].split(b'up ')[1]
+        return (up, load_five)
     except:
         return "", 0
 
