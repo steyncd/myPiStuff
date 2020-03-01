@@ -74,16 +74,16 @@ def on_message(client, userdata, message):
         print("geyser timer update command received")
         if message.topic == "helloliam/geyser/timer/1":
             print("Received update for schedule 1")
-            updateTimerSettings(1, str(message.payload.decode("utf-8")))
+            updateTimerSettings('1', str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/2":
             print("Received update for schedule 2")
-            updateTimerSettings(2, str(message.payload.decode("utf-8")))
+            updateTimerSettings('2', str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/3":
             print("Received update for schedule 3")
-            updateTimerSettings(3, str(message.payload.decode("utf-8")))
+            updateTimerSettings('3', str(message.payload.decode("utf-8")))
         elif message.topic == "helloliam/geyser/timer/4":
             print("Received update for schedule 4")
-            updateTimerSettings(4, str(message.payload.decode("utf-8")))
+            updateTimerSettings('4', str(message.payload.decode("utf-8")))
     else:
         action = str(message.payload.decode("utf-8")).strip().lower()
         client.publish("helloliam/geyser/lastcommand", action)
@@ -231,11 +231,11 @@ def parseTimer():
 
 def updateTimerSettings(i, payload):
     print("Updating time settings for schedule " + i + ": " + payload)
-    timer = parseTimer()
+    newschedule = json.loads(payload)
+
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
 
-    newschedule = json.loads(payload)
     config["Schedule"+i+"Enabled"] = newschedule["Enabled"]
     config["days"+i] = newschedule["Days"]
     config["start"+i] = newschedule["Start"]
