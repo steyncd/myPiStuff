@@ -283,6 +283,6 @@ while True:
 
         client.publish("helloliam/geyser/hoststatus", hoststatus)
 
-    runTimer()
+    # runTimer()
 
 g.cleanup()
