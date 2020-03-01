@@ -224,8 +224,10 @@ def runTimer():
     timer = parseTimer()
 
     for i in range(1, 5):
-        if timer["Schedule " + str(i)]["Enabled"] == "True" and t.strftime("%w") in timer["Schedule " + str(i)]["Days"]:
-            print("Schedule " + str(i) + " enabled and matched day")
+        schedule = "Schedule " + str(i)
+        print("Checking " + schedule)
+        if timer[schedule]["Enabled"] == "True" and t.strftime("%w") in timer["Schedule " + str(i)]["Days"]:
+            print(schedule + " enabled and matched day")
             start_time = timer["Schedule " + str(i)]["Start"].split(b":")
             stop_time = timer["Schedule " + str(i)]["Stop"].split(b":")
             if t.strftime("%H") == start_time[0] and t.strftime("%M") == start_time[1]:
@@ -281,8 +283,8 @@ while True:
             'cpu_speed': str(get_cpu_speed())
         }
 
-        # client.publish("helloliam/geyser/hoststatus", hoststatus)
+        client.publish("helloliam/geyser/hoststatus", json.dumps(hoststatus))
 
-    # runTimer()
+    runTimer()
 
 g.cleanup()
