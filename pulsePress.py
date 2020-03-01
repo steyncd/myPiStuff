@@ -5,6 +5,7 @@ import paho.mqtt.client as mqtt
 import subprocess
 import os
 import configparser
+import json
 
 g.setwarnings(False)
 g.setmode(g.BCM)
@@ -182,32 +183,35 @@ def getTimerSettings():
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
 
-    print("getting schedule 1 values")
-    days1 = config.get('timer', 'days1')
-    start1 = config.get('timer', 'start1')
-    stop1 = config.get('timer', 'stop1')
+    timer = {
+        "Schedule 1": {
+            "Enabled": config.get("timer","Schedule1Enabled"),
+            "Days": config.get("timer","days1"),
+            "Start": config.get("timer","start1"),
+            "Stop": config.get("timer","stop1")
+        },
+        "Schedule 2": {
+            "Enabled": config.get("timer","Schedule2Enabled"),
+            "Days": config.get("timer", "days2"),
+            "Start": config.get("timer", "start2"),
+            "Stop": config.get("timer", "stop2")
+        },
+        "Schedule 3": {
+            "Enabled": config.get("timer","Schedule3Enabled"),
+            "Days": config.get("timer", "days3"),
+            "Start": config.get("timer", "start3"),
+            "Stop": config.get("timer", "stop3")
+        },
+        "Schedule 4": {
+            "Enabled": config.get("timer","Schedule4Enabled"),
+            "Days": config.get("timer", "days4"),
+            "Start": config.get("timer", "start4"),
+            "Stop": config.get("timer", "stop4")
+        }
+    }
 
-    print("getting schedule 2 values")
-    days2 = config.get('timer', 'days2')
-    start2 = config.get('timer', 'start2')
-    stop2 = config.get('timer', 'stop2')
-
-    print("getting schedule 3 values")
-    days3 = config.get('timer', 'days3')
-    start3 = config.get('timer', 'start3')
-    stop3 = config.get('timer', 'stop3')
-
-    print("getting schedule 4 values")
-    days4 = config.get('timer', 'days4')
-    start4 = config.get('timer', 'start4')
-    stop4 = config.get('timer', 'stop4')
-
-    print("publishing timer settings")
-    payload = "[{\"Schedule 1\": {\"Days\": \"" + str(days1) + "\", \"Start\": \"" + str(start1) + "\", \"Stop\": \"" + str(stop1) + "\"}"
-    payload = payload + "," + "\"Schedule 2\": {\"Days\": \"" + str(days2) + "\", \"Start\": \"" + str(start2) + "\", \"Stop\": \"" + str(stop2) + "\"}"
-    payload = payload + "," + "\"Schedule 3\": {\"Days\": \"" + str(days3) + "\", \"Start\": \"" + str(start3) + "\", \"Stop\": \"" + str(stop3) + "\"}"
-    payload = payload + "," + "\"Schedule 4\": {\"Days\": \"" + str(days4) + "\", \"Start\": \"" + str(start4) + "\", \"Stop\": \"" + str(stop4) + "\"}}]"
-    client.publish("helloliam/geyser/timer", payload)
+    print(json.dumps(timer))
+    client.publish("helloliam/geyser/timer", json.dumps(timer))
 
 
 def updateTimerSettings():
