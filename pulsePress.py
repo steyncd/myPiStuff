@@ -225,10 +225,10 @@ def runTimer():
 
     for i in range(1, 5):
         schedule = "Schedule " + str(i)
-        if timer[schedule]["Enabled"] == "True" and t.strftime("%w") in timer["Schedule " + str(i)]["Days"]:
+        if timer[schedule]["Enabled"] == "True" and t.strftime("%w") in timer[schedule]["Days"]:
+            start_time = timer[schedule]["Start"].split(":")
+            stop_time = timer[schedule]["Stop"].split(":")
             print(schedule + " enabled and matched day")
-            start_time = timer["Schedule " + str(i)]["Start"].split(":")
-            stop_time = timer["Schedule " + str(i)]["Stop"].split(":")
             if t.strftime("%H") == start_time[0] and t.strftime("%M") == start_time[1]:
                 print("Start hour and minute match")
                 g.output(27, g.LOW)
