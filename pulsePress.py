@@ -232,16 +232,13 @@ def parseTimer():
 def updateTimerSettings(i, payload):
     print("Updating time settings for schedule " + i + ": " + payload)
     newschedule = json.loads(payload)
-    print("payload parsed - Enabled: " + newschedule["Enabled"] + ", Days: " + newschedule["Days"] + ", Start: " + newschedule["Start"] + ", Stop: " +newschedule["Stop"] )
 
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
-    print("read config")
-    config["Schedule"+i+"Enabled"] = newschedule["Enabled"]
-    config["days"+i] = newschedule["Days"]
-    config["start"+i] = newschedule["Start"]
-    config["stop"+i] = newschedule["Stop"]
-    print("set values...updating config")
+    config.set("timer", "Schedule"+i+"Enabled", str(newschedule["Enabled"]))
+    config.set("timer", "days"+i, newschedule["Days"])
+    config.set("timer", "start"+i, newschedule["Start"])
+    config.set("timer", "stop"+i, newschedule["Stop"])
     with open('timer.config', 'w') as configfile:
         config.write(configfile)
 
@@ -277,42 +274,42 @@ client.subscribe("helloliam/geyser/timer/3")
 client.subscribe("helloliam/geyser/timer/4")
 client.loop_start()
 
-print('Free RAM: ' + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')')
-print('Nr. of processes: ' + str(get_process_count()))
-print('Up time: ' + str(get_up_stats()[0].decode("utf-8")))
-print('Nr. of connections: ' + str(get_connections()))
-print('Temperature in C: ' + str(get_temperature()))
-print('IP-address: ' + str(get_ipaddress().decode("utf-8")))
-print('CPU speed: ' + str(get_cpu_speed()))
+# print('Free RAM: ' + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')')
+# print('Nr. of processes: ' + str(get_process_count()))
+# print('Up time: ' + str(get_up_stats()[0].decode("utf-8")))
+# print('Nr. of connections: ' + str(get_connections()))
+# print('Temperature in C: ' + str(get_temperature()))
+# print('IP-address: ' + str(get_ipaddress().decode("utf-8")))
+# print('CPU speed: ' + str(get_cpu_speed()))
 
 while True:
-    if g.input(10) == g.HIGH:
-        print("start button pressed")
-
-    if g.input(10) == g.HIGH and not startLoopRunning:
-        print("starting loop")
-        startLoop()
-
-    if g.input(9) == g.HIGH:
-        print("toggle button pressed")
-
-    if g.input(9) == g.HIGH and not toggleLightRunning:
-        print("toggling lights")
-        toggleLights()
-
-    if int(t.strftime("%M")) % 2 == 0:
-        hoststatus = {
-            'free_memory': str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')',
-            'processes': str(get_process_count()),
-            'up_time': str(get_up_stats()[0].decode("utf-8")),
-            'connection_count': str(get_connections()),
-            'temperature': str(get_temperature()),
-            'ip_address': str(get_ipaddress().decode("utf-8")),
-            'cpu_speed': str(get_cpu_speed())
-        }
-
-        client.publish("helloliam/geyser/hoststatus", json.dumps(hoststatus))
-
-    runTimer()
+    # if g.input(10) == g.HIGH:
+    t.sleep(1)
+    #
+    # if g.input(10) == g.HIGH and not startLoopRunning:
+    #     print("starting loop")
+    #     startLoop()
+    #
+    # if g.input(9) == g.HIGH:
+    #     print("toggle button pressed")
+    #
+    # if g.input(9) == g.HIGH and not toggleLightRunning:
+    #     print("toggling lights")
+    #     toggleLights()
+    #
+    # if int(t.strftime("%M")) % 2 == 0:
+    #     hoststatus = {
+    #         'free_memory': str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ')',
+    #         'processes': str(get_process_count()),
+    #         'up_time': str(get_up_stats()[0].decode("utf-8")),
+    #         'connection_count': str(get_connections()),
+    #         'temperature': str(get_temperature()),
+    #         'ip_address': str(get_ipaddress().decode("utf-8")),
+    #         'cpu_speed': str(get_cpu_speed())
+    #     }
+    #
+    #     client.publish("helloliam/geyser/hoststatus", json.dumps(hoststatus))
+    #
+    # runTimer()
 
 g.cleanup()
