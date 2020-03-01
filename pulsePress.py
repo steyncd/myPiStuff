@@ -4,6 +4,7 @@ import time as t
 import paho.mqtt.client as mqtt
 import subprocess
 import os
+import configparser
 
 g.setwarnings(False)
 g.setmode(g.BCM)
@@ -96,6 +97,9 @@ def on_message(client, userdata, message):
             client.publish("helloliam/geyser/status", "OFF")
         else:
             client.publish("helloliam/geyser/status", "ON")
+    elif action == "gettimer":
+        print("HandleCommand::gettimer command received")
+        getTimerSettings()
     elif action == "pulse":
         startLoop()
     elif action == "allon":
@@ -174,6 +178,31 @@ def get_cpu_speed():
     return cpu
 
 
+def getTimerSettings():
+    config = configparser.ConfigParser()
+    config.read(r'./timer.config')
+
+    timer = config['timer']
+    days1 = timer["days1"]
+    start1 = timer["start1"]
+    end1 = timer["end1"]
+
+    client.publish("helloliam/geyser/timer", "Schedule 1 - Days: , Start: " + str(start1) + ", End: " + str(end1))
+
+
+def updateTimerSettings():
+    config = configparser.ConfigParser()
+    config.read(r'./timer.config')
+
+    timer = config['timer']
+    days1 = timer["days1"]
+    start1 = timer["start1"]
+    end1 = timer["end1"]
+
+    with open('timer.config', 'w') as configfile:
+        config.write(configfile)
+
+
 client = mqtt.Client("HelloGeyser")
 client.connect("127.0.0.1", 1883)
 client.on_connect = on_connect
@@ -208,13 +237,17 @@ while True:
 
     if int(t.strftime("%M")) % 2 == 0:
         client.publish("helloliam/geyser/hoststatus", "{"
-                                                      "\"memory\": \"" + str(get_ram()[1]) + ' (' + str(get_ram()[0]) + ")\","
-                                                      "\"processes\": \"" + str(get_process_count()) + "\","
-                                                      "\"uptime\": \"" + str(get_up_stats()[0].decode("utf-8")) + "\","
-                                                      "\"connections\": \"" + str(get_connections()) + "\","
-                                                      "\"temperature\": \"" + str(get_temperature()) + "\","
-                                                      "\"ipaddress\": \"" + str(get_ipaddress().decode("utf-8")) + "\","
-                                                      "\"cpuspeed\": \"" + str(get_cpu_speed()) + "\""
-                                                      "}")
+                                                      "\"memory\": \"" + str(get_ram()[1]) + ' (' + str(
+            get_ram()[0]) + ")\","
+                            "\"processes\": \"" + str(get_process_count()) + "\","
+                                                                             "\"uptime\": \"" + str(
+            get_up_stats()[0].decode("utf-8")) + "\","
+                                                 "\"connections\": \"" + str(get_connections()) + "\","
+                                                                                                  "\"temperature\": \"" + str(
+            get_temperature()) + "\","
+                                 "\"ipaddress\": \"" + str(get_ipaddress().decode("utf-8")) + "\","
+                                                                                              "\"cpuspeed\": \"" + str(
+            get_cpu_speed()) + "\""
+                               "}")
 
 g.cleanup()
