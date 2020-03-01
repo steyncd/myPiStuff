@@ -131,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583039535226</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added sys info to publish">
+      <created>1583039881469</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1583039881469</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -142,7 +149,8 @@
     <MESSAGE value="added some system infor stuff" />
     <MESSAGE value="added some system infor stuff - fixes" />
     <MESSAGE value="fix to getIP Address" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix to getIP Address" />
+    <MESSAGE value="added sys info to publish" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sys info to publish" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" width="1092" height="707" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582780613667">
@@ -162,10 +170,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="116" key="#main/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780585816" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583039534521">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583039880708">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583039534521" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583039880708" />
     <state width="476" height="466" key="DebuggerActiveHint" timestamp="1582890756928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -224,10 +232,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583039536288">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583039889370">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583039536288" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583039889370" />
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
