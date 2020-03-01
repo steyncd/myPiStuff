@@ -206,7 +206,15 @@ while True:
         print("toggling lights")
         toggleLights()
 
-    # if int(t.strftime("%M")) % 2 == 0:
-    #    client.publish("helloliam/geyser/hoststatus", sys.api_version)
+    if int(t.strftime("%M")) % 2 == 0:
+        client.publish("helloliam/geyser/hoststatus", "{"
+                                                      "memory:\"" +str(get_ram()[1]) + ' (' + str(get_ram()[0]) + "\","
+                                                      "processes:\"" + str(get_process_count()) + "\","
+                                                      "uptime:\"" + str(get_up_stats()) + "\","
+                                                      "connections:\"" + str(get_connections()) + "\","
+                                                      "temperature:\"" + str(get_temperature()) + "\","
+                                                      "ipaddress:\"" + str(get_ipaddress()) + "\","
+                                                      "cpuspeed:\"" + str(get_cpu_speed()) + "\","
+                                                      "}")
 
 g.cleanup()
