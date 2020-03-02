@@ -132,7 +132,18 @@ def on_message(client, userdata, message):
         else:
             print("ToggleGeyser::Command not recognized")
             client.publish("helloliam/geyser/status", "Unknown action")
+            commands = {
+                "on":"Turn Relay 1 on",
+                "off":"Turn Relay 1 off",
+                "toggle":"Toggle Relay 1 power",
+                "allon":"Turn all Relays on",
+                "alloff":"Turn all Relays off",
+                "gettimer":"Get list of time schedules",
+                "status":"Get device status",
+                "helloliam/geyser/timer/x":"Update time schedule with {\"Enabled\": false,\"Days\": \"0,2,4\",\"Start\": \"16:54\",\"Stop\": \"16:55\"}"
+            }
 
+            client.publish("helloliam/geyser/help", json.loads(commands))
 
 def get_ram():
     try:
