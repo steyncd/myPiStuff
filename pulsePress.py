@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3.7
 import sys
 import RPi.GPIO as g
 import time as t
