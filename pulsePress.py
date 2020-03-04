@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import RPi.GPIO as g
 import time as t
@@ -9,7 +10,6 @@ import json
 
 g.setwarnings(False)
 g.setmode(g.BCM)
-
 
 g.setup(27, g.OUT)
 g.setup(22, g.OUT)
@@ -133,17 +133,18 @@ def on_message(client, userdata, message):
             print("ToggleGeyser::Command not recognized")
             client.publish("helloliam/geyser/status", "Unknown action")
             commands = {
-                "on":"Turn Relay 1 on",
-                "off":"Turn Relay 1 off",
-                "toggle":"Toggle Relay 1 power",
-                "allon":"Turn all Relays on",
-                "alloff":"Turn all Relays off",
-                "gettimer":"Get list of time schedules",
-                "status":"Get device status",
-                "helloliam/geyser/timer/x":"Update time schedule with {\"Enabled\": false,\"Days\": \"0,2,4\",\"Start\": \"16:54\",\"Stop\": \"16:55\"}"
+                "on": "Turn Relay 1 on",
+                "off": "Turn Relay 1 off",
+                "toggle": "Toggle Relay 1 power",
+                "allon": "Turn all Relays on",
+                "alloff": "Turn all Relays off",
+                "gettimer": "Get list of time schedules",
+                "status": "Get device status",
+                "helloliam/geyser/timer/x": "Update time schedule with {\"Enabled\": false,\"Days\": \"0,2,4\",\"Start\": \"16:54\",\"Stop\": \"16:55\"}"
             }
 
             client.publish("helloliam/geyser/help", json.loads(commands))
+
 
 def get_ram():
     try:
@@ -246,10 +247,10 @@ def updateTimerSettings(i, payload):
 
     config = configparser.ConfigParser()
     config.read(r'./timer.config')
-    config.set("timer", "Schedule"+i+"Enabled", str(newschedule["Enabled"]))
-    config.set("timer", "days"+i, newschedule["Days"])
-    config.set("timer", "start"+i, newschedule["Start"])
-    config.set("timer", "stop"+i, newschedule["Stop"])
+    config.set("timer", "Schedule" + i + "Enabled", str(newschedule["Enabled"]))
+    config.set("timer", "days" + i, newschedule["Days"])
+    config.set("timer", "start" + i, newschedule["Start"])
+    config.set("timer", "stop" + i, newschedule["Stop"])
     with open('timer.config', 'w') as configfile:
         config.write(configfile)
 
