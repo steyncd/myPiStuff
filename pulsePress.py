@@ -52,13 +52,11 @@ def startLoop():
 def toggleLights():
     global toggleLightRunning
     toggleLightRunning = True
-    for device in devices:
-        g.output(device, 0)
-
-    t.sleep(4)
-
-    for device in devices:
-        g.output(device, 1)
+    for d in devices:
+        if g.input(d) == 1:
+            g.output(d, 0)
+        else:
+            g.output(d, 1)
 
     toggleLightRunning = False
 

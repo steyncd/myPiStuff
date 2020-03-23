@@ -101,13 +101,6 @@
       <option name="presentableId" value="Default" />
       <updated>1582519441033</updated>
     </task>
-    <task id="LOCAL-00005" summary="added some system infor stuff">
-      <created>1583038600694</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1583038600694</updated>
-    </task>
     <task id="LOCAL-00006" summary="added some system infor stuff - fixes">
       <created>1583039098482</created>
       <option name="number" value="00006" />
@@ -444,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583335743875</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="fixed python version">
+      <created>1583336014287</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1583336014287</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -464,7 +464,8 @@
     <MESSAGE value="fixed timer config" />
     <MESSAGE value="uncommented my stuff" />
     <MESSAGE value="python bash line thing" />
-    <option name="LAST_COMMIT_MESSAGE" value="python bash line thing" />
+    <MESSAGE value="fixed python version" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed python version" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="174" width="1092" height="707" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582780613667">
@@ -484,10 +485,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="116" key="#main/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780585816" />
-    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583335741338">
+    <state x="424" y="6" key="CommitChangelistDialog2" timestamp="1583336011868">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583335741338" />
+    <state x="424" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583336011868" />
     <state width="476" height="466" key="DebuggerActiveHint" timestamp="1582890756928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -546,20 +547,22 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582780947097" />
     <state x="369" y="109" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582817463547" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583335751515">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583336015582">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583335751515" />
-    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1582884532145">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583336015582" />
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1584981698605">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="661" y="343" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582884532145" />
     <state x="2581" y="343" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1582526557300" />
     <state x="529" y="272" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1582817424006" />
-    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1582891308656">
+    <state x="661" y="343" key="com.intellij.ide.util.TipDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1584981698605" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584981830465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1582891308656" />
+    <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1584981830465" />
     <state x="616" y="173" width="670" height="676" key="search.everywhere.popup" timestamp="1582604625303">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -585,22 +588,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pulsePress.py</url>
-          <line>249</line>
+          <line>247</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pulsePress.py</url>
-          <line>250</line>
+          <line>248</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pulsePress.py</url>
-          <line>251</line>
+          <line>249</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pulsePress.py</url>
-          <line>252</line>
+          <line>250</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
