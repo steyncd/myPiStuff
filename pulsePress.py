@@ -58,6 +58,7 @@ def toggleLights():
         else:
             g.output(d, 1)
 
+    t.sleep(1)
     toggleLightRunning = False
 
 
